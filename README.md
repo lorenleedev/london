@@ -8,7 +8,7 @@
 ### 프론트엔드  
 프레임워크: Next.js with Typescript   
 상태관리: Zustand, Tanstack-Query  
-UI와 스타일: Ant Design, Vanila Extract or Tailwind-CSS  
+UI와 스타일: Ant Design, Tailwind-CSS  
 테스트: Jest  
 다국어지원: i18n  
 
@@ -43,6 +43,7 @@ firebase
 - fix: 버그 수정
 - modify: 의도적 기능 수정 또는 에셋(이미지, 폰트, 스타일 등) 변경
 - add: 신규 기능 추가 또는 에셋 추가
+- remove: 코드 제거
 - refactor: 리팩토링
 - test: 테스트 코드 작성 또는 수정
 
