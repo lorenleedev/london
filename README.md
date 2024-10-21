@@ -33,7 +33,7 @@ firebase
 # 진행 과정
 |Day|제목|내용|
 |--|--|--|
-|1일차|프로젝트 세팅|링크(준비중)|
+|1일차|프로젝트 세팅, Navigation UI|[링크](https://github.com/lorenleedev/london/blob/main/note/day1.md)|
 
 <br/><br/>
 
