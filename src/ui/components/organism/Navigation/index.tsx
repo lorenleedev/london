@@ -1,7 +1,7 @@
 import {Header} from "antd/es/layout/layout";
 import {Button, Flex, Image, Menu} from "antd";
 import ButtonGroup from "antd/es/button/button-group";
-import {PoweroffOutlined, SettingOutlined, UserOutlined} from "@ant-design/icons";
+import {PoweroffOutlined, SettingOutlined} from "@ant-design/icons";
 
 {/*TODO 메뉴 기획에 따라 수정 */
 }

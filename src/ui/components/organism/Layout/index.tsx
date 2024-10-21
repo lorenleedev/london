@@ -1,6 +1,8 @@
 import {ConfigProvider, Layout} from "antd";
 
-const CustomLayout = ({children}) => {
+const CustomLayout = ({children}: Readonly<{
+  children: React.ReactNode;
+}>) => {
   return (
     <ConfigProvider theme={{
       components: {
@@ -16,4 +18,4 @@ const CustomLayout = ({children}) => {
   )
 }
 
-export default CustomLayout as Layout;
+export default CustomLayout;
