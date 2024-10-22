@@ -1,4 +1,7 @@
 import {ConfigProvider, Layout} from "antd";
+import styles from '@/ui/components/atom/Layout/Layout.module.scss';
+
+const backgroundColor = '#ffffff';
 
 const CustomLayout = ({children}: Readonly<{
   children: React.ReactNode;
@@ -7,12 +10,12 @@ const CustomLayout = ({children}: Readonly<{
     <ConfigProvider theme={{
       components: {
         Layout: {
-          headerBg: '#ffffff',
-          bodyBg: '#ffffff'
+          headerBg: backgroundColor,
+          bodyBg: backgroundColor
         },
       },
     }}>
-      <Layout style={{minWidth: '1400px'}}>
+      <Layout className={styles.layout}>
         {children}
       </Layout>
     </ConfigProvider>
