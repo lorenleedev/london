@@ -1,4 +1,4 @@
-import styles from './Section.module.scss';
+import styles from '@/ui/components/atom/Section/Section.module.scss';
 
 interface SectionProps extends React.HTMLAttributes<HTMLElement> {
   children: React.ReactNode;
