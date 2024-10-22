@@ -1,0 +1,5 @@
+@use '../../../../assets/style/variables.scss';
+
+.layout {
+  min-width: variables.$min-view-port;
+}

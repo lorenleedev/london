@@ -1,4 +1,6 @@
+@use '../../../../assets/style/variables.scss';
+
 .section {
-  max-width: 1400px;
+  max-width: variables.$min-view-port;
   margin: 80px auto;
 }
