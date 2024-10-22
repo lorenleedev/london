@@ -7,7 +7,8 @@ const CustomLayout = ({children}: Readonly<{
     <ConfigProvider theme={{
       components: {
         Layout: {
-          headerBg: '#ffffff'
+          headerBg: '#ffffff',
+          bodyBg: '#ffffff'
         },
       },
     }}>
