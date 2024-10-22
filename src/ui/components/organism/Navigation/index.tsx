@@ -7,7 +7,7 @@ import {PoweroffOutlined, SettingOutlined} from "@ant-design/icons";
 }
 const items = new Array(1).fill(null).map((_, index) => ({
   key: String(index + 1),
-  label: `홈`,
+  label: `채용공고`,
 }));
 
 const Navigation = () => {
