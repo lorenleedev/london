@@ -40,9 +40,9 @@ const Index = () => {
         <Col>
           <Flex gap={36}>
             {
-              dummy.map(data => {
+              dummy.map((data, index) => {
                 return (
-                  <HighlightCard {...data}/>
+                  <HighlightCard key={index} {...data}/>
                 )
               })
             }
