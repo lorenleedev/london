@@ -224,7 +224,7 @@ const HomePage = () => {
                 <Flex vertical={true}>
                   <Paragraph style={{fontSize: '14px', lineHeight: 1.3}}>내가 작성한 이력서 기반으로 추천합니다.<br/>
                     정확한 추천을 위해 이력서의 모든 항목을 입력해주세요!</Paragraph>
-                  <Button>이력서 업데이트하기<RightOutlined style={{fontSize: '10px'}} block={false}/></Button>
+                  <Button>이력서 업데이트하기<RightOutlined style={{fontSize: '10px'}}/></Button>
                 </Flex>
               } title="맞춤공고란?" trigger="click">
                 <InfoCircleFilled style={{margin: '0 0 11px 2px', color: 'gray'}}/>
