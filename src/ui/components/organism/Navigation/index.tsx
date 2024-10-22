@@ -37,7 +37,7 @@ const Navigation = () => {
       {/*<ButtonGroup>*/}
       {/*  <Button><UserOutlined/>회원가입/로그인</Button>*/}
       {/*</ButtonGroup>*/}
-      {/*TODO 로그인 상태에서 노출 */}
+      {/*TODO 로그인 상태에서 노출 PR test*/}
       <Flex align={'center'} gap={6} style={{marginRight: '12px'}}>
         <Image width={30} height={30} src={'/images/dummy/anonymous.png'} preview={false} style={{borderRadius: '50%', background: '#e9eaeb', padding: '4px'}}></Image>
         반갑습니다, OOO님!
