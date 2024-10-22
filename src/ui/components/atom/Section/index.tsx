@@ -1,8 +1,12 @@
-const Section = ({children}: Readonly<{
+import styles from './Section.module.scss';
+
+interface SectionProps extends React.HTMLAttributes<HTMLElement> {
   children: React.ReactNode;
-}>) => {
+}
+
+const Section = ({children, className = '', ...rest}: Readonly<SectionProps>) => {
   return(
-    <section style={{maxWidth: '1400px', margin: '80px auto'}}>
+    <section className={`${styles.section} ${className || ''}`} {...rest}>
       {children}
     </section>
   )
