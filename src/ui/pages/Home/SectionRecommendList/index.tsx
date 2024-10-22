@@ -1,6 +1,5 @@
 import {Button, Col, Flex, Popover, Row} from "antd";
 import Title from "antd/es/typography/Title";
-import Paragraph from "antd/es/typography/Paragraph";
 import {InfoCircleFilled, RightOutlined} from "@ant-design/icons";
 import JobList from "@/ui/components/organism/JobList";
 import Section from "@/ui/components/atom/Section";
