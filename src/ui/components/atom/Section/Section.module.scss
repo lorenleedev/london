@@ -1,6 +1,6 @@
 @use '../../../../assets/style/variables.scss';
 
 .section {
-  max-width: variables.$min-view-port;
+  max-width: variables.$minViewPort;
   margin: 80px auto;
 }
