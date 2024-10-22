@@ -12,7 +12,7 @@ const CustomLayout = ({children}: Readonly<{
         },
       },
     }}>
-      <Layout>
+      <Layout style={{minWidth: '1400px'}}>
         {children}
       </Layout>
     </ConfigProvider>
