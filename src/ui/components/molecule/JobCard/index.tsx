@@ -32,8 +32,8 @@ const JobCard = ({name, image, favorite, title, applied, salary, benefit, locati
             <p className={styles.name}>{name}</p>
           </Flex>
           {favorite ?
-            <HeartFilled className={styles.favoriteActive}/> :
-            <HeartOutlined className={styles.favoriteDefault}/>}
+            <HeartFilled className={styles.favoriteActive} data-testid={"filledHeart"}/> :
+            <HeartOutlined className={styles.favoriteDefault} data-testid={"outlinedHeart"}/>}
         </Flex>
         <p className={styles.title}>{title}</p>
         <Flex vertical={true} className={'mt-8'}>
