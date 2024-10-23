@@ -1,7 +1,7 @@
 import {List} from "antd";
-import JobCard from "@/ui/components/molecule/JobCard";
+import JobCard, {JobCardProps} from "@/ui/components/molecule/JobCard";
 
-const JobList = ({data}) => {
+const JobList = ({data}: JobCardProps[]) => {
   return (<List
     grid={{gutter: 16, column: 4}}
     dataSource={data}

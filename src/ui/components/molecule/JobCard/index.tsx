@@ -2,7 +2,7 @@ import {Badge, Card, Flex, Image} from "antd";
 import {HeartFilled, HeartOutlined} from "@ant-design/icons";
 import styles from "@/ui/components/molecule/JobCard/JobCard.module.scss";
 
-interface JobCardProps {
+export interface JobCardProps {
   name: string;
   image?: string;
   favorite: boolean;
