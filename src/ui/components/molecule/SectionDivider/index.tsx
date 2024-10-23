@@ -7,17 +7,15 @@ interface SectionDividerProps extends DividerProps{
   content: string;
 }
 
-const CustomDivider = Divider as Omit<DividerProps, 'children'>
-
 const SectionDivider = ({
                           content,
                           ...rest
                         }: Readonly<SectionDividerProps>) => {
   return (
     <Section>
-      <CustomDivider {...rest}>
+      <Divider {...rest}>
         <span className={styles.content}>{content}</span>
-      </CustomDivider>
+      </Divider>
     </Section>
   )
 }
