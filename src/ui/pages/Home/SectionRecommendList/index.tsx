@@ -22,7 +22,7 @@ const SectionRecommendList = ({data}) => {
               <InfoCircleFilled className={styles.triggerIcon}/>
             </Popover>
           </Flex>
-          <JobList data={data}/>
+          <JobList jobList={data}/>
         </Col>
       </Row>
     </Section>)

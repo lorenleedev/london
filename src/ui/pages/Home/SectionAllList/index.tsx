@@ -12,7 +12,7 @@ const SectionAllList = ({data}) => {
           <Title level={3}>전체 공고</Title>
           <p className={styles.description}>총 382건</p>
         </Flex>
-        <JobList data={data}/>
+        <JobList jobList={data}/>
       </Col>
     </Row>
   </Section>)

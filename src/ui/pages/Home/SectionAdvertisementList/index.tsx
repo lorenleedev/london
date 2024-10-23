@@ -12,7 +12,7 @@ const SectionAdvertisementList = ({data}) => {
           <Flex gap={6} align={'start'} className={'mb-2'}>
             <Title level={3}>추천 공고</Title><Tag color="purple">AD</Tag>
           </Flex>
-          <JobList data={data}/>
+          <JobList jobList={data}/>
         </Col>
       </Row>
     </Section>

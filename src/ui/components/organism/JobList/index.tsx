@@ -1,10 +1,13 @@
 import {List} from "antd";
 import JobCard, {JobCardProps} from "@/ui/components/molecule/JobCard";
 
-const JobList = ({data}: JobCardProps[]) => {
+interface JobListProps {
+  jobList: JobCardProps[];
+}
+const JobList = ({jobList}: JobListProps) => {
   return (<List
     grid={{gutter: 16, column: 4}}
-    dataSource={data}
+    dataSource={jobList}
     renderItem={(item) => (
       <List.Item>
         <JobCard {...item}/>
