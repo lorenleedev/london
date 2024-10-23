@@ -10,3 +10,4 @@
 <br/>
 
 ## 결과물
+<img width="1438" alt="스크린샷 2024-10-23 오전 12 40 27" src="https://github.com/user-attachments/assets/4346e20e-1315-4a6c-9676-26e92b64a676">
