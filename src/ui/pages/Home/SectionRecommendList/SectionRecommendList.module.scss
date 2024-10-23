@@ -1,0 +1,15 @@
+@use "../../../../assets/style/variables";
+
+.description {
+  font-size: 0.875rem;
+  line-height: 1.3;
+}
+
+.buttonIcon {
+  font-size: 0.625rem;
+}
+
+.sectionRecommendList .triggerIcon {
+  margin: 0 0 0.6875rem 0.125rem;
+  color: variables.$colorGray6;
+}

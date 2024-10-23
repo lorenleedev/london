@@ -7,7 +7,7 @@ import {PoweroffOutlined, SettingOutlined} from "@ant-design/icons";
 }
 const items = new Array(1).fill(null).map((_, index) => ({
   key: String(index + 1),
-  label: `홈`,
+  label: `채용공고`,
 }));
 
 const Navigation = () => {
@@ -30,16 +30,16 @@ const Navigation = () => {
         style={{
           flex: 1,
           minWidth: 0,
-          padding: '0 40px'
+          padding: '0 2.5rem'
         }}
       />
       {/*TODO 비로그인 상태에서 노출 */}
       {/*<ButtonGroup>*/}
       {/*  <Button><UserOutlined/>회원가입/로그인</Button>*/}
       {/*</ButtonGroup>*/}
-      {/*TODO 로그인 상태에서 노출 */}
-      <Flex align={'center'} gap={6} style={{marginRight: '12px'}}>
-        <Image width={30} height={30} src={'/images/dummy/anonymous.png'} preview={false} style={{borderRadius: '50%', background: '#e9eaeb', padding: '4px'}}></Image>
+      {/*TODO 로그인 상태에서 노출 PR test*/}
+      <Flex align={'center'} gap={6} style={{marginRight: '0.75rem'}}>
+        <Image width={30} height={30} src={'/images/dummy/anonymous.png'} preview={false} style={{borderRadius: '50%', background: '#e9eaeb', padding: '0.25rem'}}></Image>
         반갑습니다, OOO님!
       </Flex>
       <ButtonGroup>
