@@ -4,8 +4,12 @@ import {InfoCircleFilled, RightOutlined} from "@ant-design/icons";
 import JobList from "@/ui/components/organism/JobList";
 import Section from "@/ui/components/atom/Section";
 import styles from "@/ui/pages/Home/SectionRecommendList/SectionRecommendList.module.scss";
+import {JobCardProps} from "@/ui/components/molecule/JobCard";
 
-const SectionRecommendList = ({data}) => {
+interface SectionRecommendList {
+  jobList: JobCardProps[];
+}
+const SectionRecommendList = ({jobList}: SectionRecommendList) => {
   return (
     <Section className={styles.sectionRecommendList}>
       <Row>
@@ -22,7 +26,7 @@ const SectionRecommendList = ({data}) => {
               <InfoCircleFilled className={styles.triggerIcon}/>
             </Popover>
           </Flex>
-          <JobList jobList={data}/>
+          <JobList jobList={jobList}/>
         </Col>
       </Row>
     </Section>)
