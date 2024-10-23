@@ -1,40 +1,40 @@
 @use "../../../../assets/style/variables";
 .card {
   cursor: pointer;
-  min-height: 250px;
+  min-height: 15.625rem;
 }
 
 .title {
-  font-size: 20px;
-  margin-top: 12px;
+  font-size: 1.25rem;
+  margin-top: 0.75rem;
   font-weight: bold;
-  min-height: 63px;
+  min-height: 3.938rem;
 }
 
 .profileImage {
-  border-radius: 10px;
+  border-radius: 0.625rem;
   background: variables.$colorFillContent;
-  padding: 4px;
+  padding: 0.25rem;
 }
 
 .name {
-  font-size: 16px;
+  font-size: 1rem;
 }
 
 .favorite {
-  font-size: 20px;
+  font-size: 1.25rem;
   transition: transform variables.$transitionDuration;
   &:hover {
-    transform: translateY(-1px);
+    transform: translateY(-0.063px);
   }
 }
 
-.favoriteActive {
+.card .favoriteActive {
   @extend .favorite;
-  color: variables.$colorHighlight !important;
+  color: variables.$colorHighlight;
 }
 
-.favoriteDefault {
+.card .favoriteDefault {
   @extend .favorite;
-  color: variables.$colorTextDisabled !important;
+  color: variables.$colorTextDisabled;
 }
