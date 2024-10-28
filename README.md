@@ -1,6 +1,6 @@
 # 프로젝트 설명
 프론트엔드 기술능력을 보여주기 위한 가상의 서비스입니다.  
-비트윈잡스는 헤드헌터와 구직자를 연결해주는 플랫폼입니다.
+비트윈잡스는 헤드헌터와 구직자를 연결해주는 플랫폼입니다.  
 배포된 서비스 보기: [링크](https://london-azure.vercel.app/)
 
 <br/><br/>
@@ -35,8 +35,9 @@ firebase
 # 진행 과정
 | Day | 제목                         | 내용                                                                 |
 |-----|----------------------------|--------------------------------------------------------------------|
-| 1일차 | 프로젝트 세팅, Navigation UI     | [링크](https://github.com/lorenleedev/london/blob/main/note/day1.md) |
+| 1일차 | 프로젝트 세팅, Navigation 추가     | [링크](https://github.com/lorenleedev/london/blob/main/note/day1.md) |
 | 2일차 | 채용공고 페이지 추가, CodeRabbit 도입 | [링크](https://github.com/lorenleedev/london/blob/main/note/day2.md) |
+| 3일차 | Footer 추가 | [링크](https://github.com/lorenleedev/london/blob/main/note/day3.md) |
 
 <br/><br/>
 
