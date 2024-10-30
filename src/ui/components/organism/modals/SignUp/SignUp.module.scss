@@ -1,0 +1,7 @@
+@use "../../../../../assets/style/variables";
+
+.errorMessage {
+  text-align: center;
+  color: variables.$colorError;
+  margin-top: 12px;
+}
