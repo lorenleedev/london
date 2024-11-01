@@ -20,14 +20,22 @@ const SignUp = ({
   const signInWithGoogle = async () => {
     try {
       const result = await signIn();
-      const {uid, displayName: user_name = '', email = '', photoURL: profile_picture = ''} = result.user;
+      const {
+        uid,
+        displayName: user_name,
+        email,
+        photoURL: profile_picture
+      } = result.user;
       const user: User = {uid, user_name, email, profile_picture};
       userStore.setUser(user);
       postUserInfo(user);
       handleCancel();
-    } catch (error) {
-      const errorMessage = error.message;
-      setErrorMessage(errorMessage);
+    } catch (error: unknown) {
+      if (error instanceof Error) {
+        setErrorMessage(error.message);
+      } else {
+        console.error('An unknown error occurred');
+      }
     }
   };
 

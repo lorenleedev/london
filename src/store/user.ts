@@ -10,9 +10,9 @@ export default useUserStore;
 
 export interface User {
   uid: string;
-  email: string;
-  user_name: string;
-  profile_picture: string;
+  email: string | null;
+  user_name: string | null;
+  profile_picture: string | null;
 }
 
 interface UserStore {
