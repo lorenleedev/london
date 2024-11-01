@@ -6,21 +6,19 @@ import {PoweroffOutlined, SettingOutlined, UserOutlined} from "@ant-design/icons
 import {useEffect, useState} from "react";
 import SignUp from "@/ui/components/organism/modals/SignUp";
 import useToggle from "@/hooks/useToggle";
-import useUserStore from "@/store/user";
-import {getAuth, signOut} from "@firebase/auth";
+import useUserStore, {User} from "@/store/user";
+import {postUserInfo, signOut} from "@/api/user";
 import "@/thridparty/firebase";
-import {ref, set} from "firebase/database";
-import {db} from "@/thridparty/firebase";
-{/*TODO 메뉴 기획에 따라 수정 */
-}
+
 const items = new Array(1).fill(null).map((_, index) => ({
   key: String(index + 1),
   label: `채용공고`,
 }));
 
 const Navigation = () => {
-  const {isToggleOn: isSignUpModalOn, handleToggle: handleSignUpToggle} = useToggle();
   const userStore = useUserStore();
+
+  const {isToggleOn: isSignUpModalOn, handleToggle: handleSignUpToggle} = useToggle();
   const [isSignIn, setIsSignIn] = useState(false);
   const [modal, contextHolder] = Modal.useModal();
 
@@ -40,12 +38,13 @@ const Navigation = () => {
       okText: "아니오",
       cancelText: "네",
       onCancel: () => {
-        set(ref(db, 'users/' + userStore.user?.uid), {
-          ...userStore.user,
+        const user = {
+          ...userStore.user as User,
           date_of_logout: new Date().toString()
-        });
-        const auth = getAuth();
-        signOut(auth).finally(() => {
+        }
+
+        postUserInfo(user);
+        signOut().finally(() => {
           userStore.resetUser();
         });
       }
@@ -100,7 +99,11 @@ const Navigation = () => {
           </Button>
         </ButtonGroup>)
       }
-      <SignUp open={isSignUpModalOn} handleOk={handleSignUpToggle} handleCancel={handleSignUpToggle}/>
+      <SignUp
+        open={isSignUpModalOn}
+        handleOk={handleSignUpToggle}
+        handleCancel={handleSignUpToggle}
+      />
       {contextHolder}
     </Header>
   )

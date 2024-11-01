@@ -2,9 +2,7 @@ import {Modal, Button, Flex, Image} from 'antd';
 import {useState} from "react";
 import styles from "@/ui/components/organism/modals/SignUp/SignUp.module.scss";
 import useUserStore, {User} from "@/store/user";
-import {auth, db, provider} from "@/thridparty/firebase";
-import {signInWithPopup} from "@firebase/auth";
-import {ref, set} from "firebase/database";
+import {postUserInfo, signIn} from "@/api/user";
 
 interface SignUpProps {
   open: boolean;
@@ -21,24 +19,16 @@ const SignUp = ({
 
   const signInWithGoogle = async () => {
     try {
-      const result = await signInWithPopup(auth, provider);
+      const result = await signIn();
       const {uid, displayName: user_name = '', email = '', photoURL: profile_picture = ''} = result.user;
       const user: User = {uid, user_name, email, profile_picture};
       userStore.setUser(user);
-      saveUserData(user);
+      postUserInfo(user);
       handleCancel();
     } catch (error) {
       const errorMessage = error.message;
       setErrorMessage(errorMessage);
     }
-  };
-
-  const saveUserData = (user: User) => {
-    set(ref(db, 'users/' + user.uid), {
-      user_name: user.user_name,
-      email: user.email,
-      profile_picture: user.profile_picture,
-    });
   };
 
   return (
