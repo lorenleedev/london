@@ -15,6 +15,7 @@ export interface User {
   email: string | null;
   user_name: string | null;
   profile_picture: string | null;
+  updated_at?: string;
 }
 
 interface UserStore {

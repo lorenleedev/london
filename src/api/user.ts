@@ -22,9 +22,16 @@ export const signOut = async (): Promise<void> => {
 }
 
 export const postUserInfo = (user: User) => {
-  return set(ref(db, 'users/' + user.uid), {
+  if (!user?.uid || !user?.email) {
+    throw new Error('필수 사용자 정보가 누락되었습니다.');
+  }
+  // 어떤 특수 문자나 공백을 포함하여 URL로 사용시 안전하게 전송할 수 있도록 변환
+  const sanitizedUid = encodeURIComponent(user.uid);
+
+  return set(ref(db, 'users/' + sanitizedUid), {
     user_name: user.user_name,
     email: user.email,
     profile_picture: user.profile_picture,
+    updated_at: new Date().toISOString()
   });
 };
