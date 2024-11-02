@@ -6,7 +6,6 @@ import {postUserInfo, signIn} from "@/api/user";
 
 interface SignUpProps {
   open: boolean;
-  handleOk: () => void;
   handleCancel: () => void;
 }
 
