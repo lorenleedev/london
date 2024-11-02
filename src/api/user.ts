@@ -13,8 +13,13 @@ export const signIn = async (): Promise<UserCredential> => {
 }
 
 export const signOut = () => {
-  const auth = getAuth();
-  return signOutFirebase(auth);
+  try {
+    const auth = getAuth();
+    return signOutFirebase(auth);
+  } catch (error) {
+    console.error('로그아웃 중 오류 발생:', error);
+    throw error;
+  }
 }
 
 export const postUserInfo = (user: User) => {
