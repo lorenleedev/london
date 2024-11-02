@@ -1,10 +1,15 @@
-import {getAuth, signInWithPopup, signOut as signOutFirebase} from "@firebase/auth";
+import {getAuth, signInWithPopup, signOut as signOutFirebase, UserCredential} from "@firebase/auth";
 import {auth, db, provider} from "@/thridparty/firebase";
 import {User} from "@/store/user";
 import {ref, set} from "firebase/database";
 
-export const signIn = () => {
-  return signInWithPopup(auth, provider);
+export const signIn = async (): Promise<UserCredential> => {
+  try {
+    return signInWithPopup(auth, provider);
+  } catch (error) {
+    console.error('로그인 중 오류 발생:', error);
+    throw error;
+  }
 }
 
 export const signOut = () => {
