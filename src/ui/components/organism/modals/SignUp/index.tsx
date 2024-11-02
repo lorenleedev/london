@@ -27,7 +27,7 @@ const SignUp = ({
       } = result.user;
       const user: User = {uid, user_name, email, profile_picture};
       userStore.setUser(user);
-      postUserInfo(user);
+      await postUserInfo(user);
       handleCancel();
     } catch (error: unknown) {
       if (error instanceof Error) {
