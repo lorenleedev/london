@@ -21,7 +21,7 @@ const SignUp = ({
       const result = await signIn();
       const {
         uid,
-        displayName: user_name,
+        displayName: user_name = '사용자',
         email,
         photoURL: profile_picture
       } = result.user;
