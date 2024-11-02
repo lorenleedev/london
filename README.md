@@ -38,7 +38,7 @@ firebase
 | 1일차 | 프로젝트 세팅, Navigation 추가     | [링크](https://github.com/lorenleedev/london/blob/main/note/day1.md) |
 | 2일차 | 채용공고 페이지 추가, CodeRabbit 도입 | [링크](https://github.com/lorenleedev/london/blob/main/note/day2.md) |
 | 3일차 | Footer 추가 | [링크](https://github.com/lorenleedev/london/blob/main/note/day3.md) |
-| 4일차 | 회원가입 기능 추가 | [링크](https://github.com/lorenleedev/london/blob/main/note/day4.md) |
+| 4일차 | 구글 회원가입/로그인/로그아웃 기능 추가 | [링크](https://github.com/lorenleedev/london/blob/main/note/day4.md) |
 
 <br/><br/>
 
