@@ -12,7 +12,7 @@ export const signIn = async (): Promise<UserCredential> => {
   }
 }
 
-export const signOut = () => {
+export const signOut = async (): Promise<void> => {
   try {
     const auth = getAuth();
     return signOutFirebase(auth);
