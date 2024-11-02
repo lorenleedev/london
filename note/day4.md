@@ -8,5 +8,5 @@
 
 <br/>
 
-## 결과물
-<img width="1431" alt="스크린샷 2024-11-02 오전 12 14 15" src="https://github.com/user-attachments/assets/26467e94-34d2-4f24-ada9-0b5e97ef307e">
+## 영상
+https://github.com/user-attachments/assets/4ebf4861-4a42-4fe1-ae28-f9c244d632dd
