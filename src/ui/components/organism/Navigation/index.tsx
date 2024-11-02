@@ -1,16 +1,56 @@
+"use client";
 import {Header} from "antd/es/layout/layout";
-import {Button, Flex, Image, Menu} from "antd";
+import {Button, Flex, Image, Menu, Modal} from "antd";
 import ButtonGroup from "antd/es/button/button-group";
-import {PoweroffOutlined, SettingOutlined} from "@ant-design/icons";
+import {PoweroffOutlined, SettingOutlined, UserOutlined} from "@ant-design/icons";
+import {useEffect, useState} from "react";
+import SignUp from "@/ui/components/organism/modals/SignUp";
+import useToggle from "@/hooks/useToggle";
+import useUserStore, {User} from "@/store/user";
+import {postUserInfo, signOut} from "@/api/user";
+import "@/thridparty/firebase";
 
-{/*TODO 메뉴 기획에 따라 수정 */
-}
 const items = new Array(1).fill(null).map((_, index) => ({
   key: String(index + 1),
   label: `채용공고`,
 }));
 
 const Navigation = () => {
+  const userStore = useUserStore();
+
+  const {isToggleOn: isSignUpModalOn, handleToggle: handleSignUpToggle} = useToggle();
+  const [isSignIn, setIsSignIn] = useState(false);
+  const [modal, contextHolder] = Modal.useModal();
+
+  useEffect(() => {
+    if (userStore.user) {
+      setIsSignIn(true);
+    } else {
+      setIsSignIn(false);
+    }
+  }, [userStore.user]);
+
+  const handleClickSignOut = () => {
+    modal.confirm({
+      title: '로그아웃',
+      content: '로그아웃 하시겠습니까?',
+      centered: true,
+      okText: "아니오",
+      cancelText: "네",
+      onCancel: () => {
+        const user = {
+          ...userStore.user as User,
+          date_of_logout: new Date().toString()
+        }
+
+        postUserInfo(user);
+        signOut().finally(() => {
+          userStore.resetUser();
+        });
+      }
+    });
+  }
+
   return (
     <Header
       style={{
@@ -33,20 +73,37 @@ const Navigation = () => {
           padding: '0 2.5rem'
         }}
       />
-      {/*TODO 비로그인 상태에서 노출 */}
-      {/*<ButtonGroup>*/}
-      {/*  <Button><UserOutlined/>회원가입/로그인</Button>*/}
-      {/*</ButtonGroup>*/}
-      {/*TODO 로그인 상태에서 노출 PR test*/}
-      <Flex align={'center'} gap={6} style={{marginRight: '0.75rem'}}>
-        <Image width={30} height={30} src={'/images/dummy/anonymous.png'} preview={false} style={{borderRadius: '50%', background: '#e9eaeb', padding: '0.25rem'}}></Image>
-        반갑습니다, OOO님!
-      </Flex>
-      <ButtonGroup>
-        <Button>
-          <SettingOutlined/>마이페이지</Button>
-        <Button><PoweroffOutlined/>로그아웃</Button>
-      </ButtonGroup>
+      {
+        isSignIn ? (<>
+          <Flex align={'center'} gap={6} style={{marginRight: '0.75rem'}}>
+            <Image
+              width={30}
+              height={30}
+              src={userStore.user?.profile_picture || '/images/dummy/anonymous.png'}
+              preview={false}
+              style={{borderRadius: '50%', background: '#e9eaeb', padding: '0.25rem'}}
+            ></Image>
+            반갑습니다, {userStore.user?.user_name}님!
+          </Flex>
+          <ButtonGroup>
+            <Button>
+              <SettingOutlined/>마이페이지</Button>
+            <Button onClick={handleClickSignOut}>
+              <PoweroffOutlined/>로그아웃
+            </Button>
+          </ButtonGroup>
+        </>) : (<ButtonGroup>
+          <Button onClick={handleSignUpToggle}>
+            <UserOutlined/>
+            회원가입/로그인
+          </Button>
+        </ButtonGroup>)
+      }
+      <SignUp
+        open={isSignUpModalOn}
+        handleCancel={handleSignUpToggle}
+      />
+      {contextHolder}
     </Header>
   )
 }
