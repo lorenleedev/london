@@ -5,8 +5,8 @@ interface UseToggle {
   handleToggle: () => void;
 }
 
-const useToggle = (): UseToggle => {
-  const [isToggleOn, setIsToggleOn] = useState(false);
+const useToggle = (initialState: boolean = false): UseToggle => {
+  const [isToggleOn, setIsToggleOn] = useState(initialState);
 
   return {
     handleToggle: () => setIsToggleOn(!isToggleOn),
