@@ -51,7 +51,8 @@ const SignUp = ({
             닫기
           </Button>
         }>
-        <Flex align={'center'} justify={'center'} className={'my-12'}>
+        <Flex align={'center'} justify={'center'} className={'my-10'} vertical={true}>
+          <p className={'text-center mb-4'}>구글 계정으로 간편하게 <br/>가입하거나 로그인할 수 있습니다.</p>
           <Button
             size={'large'}
             type={'default'}
