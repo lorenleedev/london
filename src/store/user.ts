@@ -2,7 +2,9 @@ import { create } from 'zustand'
 
 const useUserStore = create<UserStore>((set) => ({
   user: null,
-  setUser: (user: User) => set((state) => ({ user: {...state.user, ...user} })),
+  setUser: (user: User) => set((state) => ({ user:
+    state.user ? {...state.user, ...user} : user
+  })),
   resetUser: () => set({user: null})
 }));
 
