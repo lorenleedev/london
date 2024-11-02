@@ -101,7 +101,6 @@ const Navigation = () => {
       }
       <SignUp
         open={isSignUpModalOn}
-        handleOk={handleSignUpToggle}
         handleCancel={handleSignUpToggle}
       />
       {contextHolder}
