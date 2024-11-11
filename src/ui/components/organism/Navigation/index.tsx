@@ -43,8 +43,13 @@ const Navigation = () => {
           ...userStore.user as User,
           logged_out_at: dayjs().toISOString()
         }
-        await Promise.all([postUserInfo(user), signOut()]);
-        userStore.resetUser();
+        try {
+          await Promise.all([postUserInfo(user), signOut()]);
+        } catch (error) {
+          console.error('로그아웃 실패: ', error);
+        } finally {
+          userStore.resetUser();
+        }
       }
     });
   }
