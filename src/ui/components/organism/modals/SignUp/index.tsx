@@ -36,7 +36,7 @@ const SignUp = ({
   };
 
   const handleClickSignIn = async () => {
-    const {userInfo} = await signInWithGoogle;
+    const userInfo = await signInWithGoogle();
     await postUserInfo(userInfo);
     userStore.setUser(userInfo);
     handleCancel();
