@@ -16,6 +16,7 @@ export interface User {
   user_name: string | null;
   profile_picture: string | null;
   updated_at?: string;
+  logouted_at?: string;
 }
 
 interface UserStore {
