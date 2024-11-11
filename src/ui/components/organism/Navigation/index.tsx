@@ -41,7 +41,7 @@ const Navigation = () => {
       onCancel: async () => {
         const user = {
           ...userStore.user as User,
-          logouted_at: dayjs().toISOString()
+          logged_out_at: dayjs().toISOString()
         }
         await Promise.all([postUserInfo(user), signOut()]);
         userStore.resetUser();
