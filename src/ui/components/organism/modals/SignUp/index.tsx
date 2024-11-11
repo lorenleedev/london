@@ -18,25 +18,29 @@ const SignUp = ({
 
   const signInWithGoogle = async () => {
     try {
-      const result = await signIn();
-      const {
-        uid,
-        displayName: user_name = '사용자',
-        email,
-        photoURL: profile_picture
-      } = result.user;
-      const user: User = {uid, user_name, email, profile_picture};
-      userStore.setUser(user);
-      await postUserInfo(user);
-      handleCancel();
+      const {user} = await signIn();
+      const userInfo: User = {
+        uid: user.uid,
+        user_name: user.displayName || '사용자',
+        email: user.email,
+        profile_picture: user.photoURL
+      };
+      return userInfo;
     } catch (error: unknown) {
       if (error instanceof Error) {
         setErrorMessage(error.message);
       } else {
-        console.error('An unknown error occurred');
+        console.error('구글 로그인 중 signInWithGoogle 함수에서 에러 발생: ', error);
       }
     }
   };
+
+  const handleClickSignIn = async () => {
+    const {userInfo} = await signInWithGoogle;
+    await postUserInfo(userInfo);
+    userStore.setUser(userInfo);
+    handleCancel();
+  }
 
   return (
     <>
@@ -56,7 +60,7 @@ const SignUp = ({
           <Button
             size={'large'}
             type={'default'}
-            onClick={signInWithGoogle}
+            onClick={handleClickSignIn}
           >
             <Image src={"/images/thirdparty/google-icon.png"} preview={false} width={25}/>
             Google 계정으로 회원가입/로그인
