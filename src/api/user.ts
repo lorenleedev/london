@@ -1,5 +1,5 @@
 import {signInWithPopup, signOut as signOutFirebase, UserCredential} from "@firebase/auth";
-import {auth, db, provider} from "@/thridparty/firebase";
+import {auth, db, provider} from "@/thirdparty/firebase";
 import {User} from "@/store/user";
 import {ref, set} from "firebase/database";
 
@@ -29,9 +29,8 @@ export const postUserInfo = (user: User) => {
   const sanitizedUid = encodeURIComponent(user.uid);
 
   return set(ref(db, 'users/' + sanitizedUid), {
-    user_name: user.user_name,
-    email: user.email,
+    ...user,
     profile_picture: user.profile_picture,
-    updated_at: new Date().toISOString()
+    updated_at: new Date().toISOString(),
   });
 };

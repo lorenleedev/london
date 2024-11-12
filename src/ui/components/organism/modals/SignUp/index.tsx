@@ -3,6 +3,7 @@ import {useState} from "react";
 import styles from "@/ui/components/organism/modals/SignUp/SignUp.module.scss";
 import useUserStore, {User} from "@/store/user";
 import {postUserInfo, signIn} from "@/api/user";
+import {FirebaseError} from "@firebase/app";
 
 interface SignUpProps {
   open: boolean;
@@ -18,25 +19,37 @@ const SignUp = ({
 
   const signInWithGoogle = async () => {
     try {
-      const result = await signIn();
-      const {
-        uid,
-        displayName: user_name = '사용자',
-        email,
-        photoURL: profile_picture
-      } = result.user;
-      const user: User = {uid, user_name, email, profile_picture};
-      userStore.setUser(user);
-      await postUserInfo(user);
-      handleCancel();
+      const {user} = await signIn();
+      const userInfo: User = {
+        uid: user.uid,
+        user_name: user.displayName || '사용자',
+        email: user.email,
+        profile_picture: user.photoURL
+      };
+      return userInfo;
     } catch (error: unknown) {
-      if (error instanceof Error) {
-        setErrorMessage(error.message);
-      } else {
-        console.error('An unknown error occurred');
-      }
+      const errorCode = error instanceof FirebaseError ? error.code : '';
+      throw new Error(errorCode);
     }
   };
+
+  const handleClickSignIn = async () => {
+    try {
+      const userInfo = await signInWithGoogle();
+      if (userInfo) {
+        await postUserInfo(userInfo);
+        userStore.setUser(userInfo);
+        handleCancel();
+      }
+    } catch (error: unknown) {
+      // 사용자가 구글 로그인 팝업을 닫은 경우
+      if ( error instanceof Error && error.message === 'auth/popup-closed-by-user') {
+        setErrorMessage('');
+      } else {
+        setErrorMessage('회원가입/로그인에 실패했습니다. 다시 시도해주세요.');
+      }
+    }
+  }
 
   return (
     <>
@@ -56,7 +69,7 @@ const SignUp = ({
           <Button
             size={'large'}
             type={'default'}
-            onClick={signInWithGoogle}
+            onClick={handleClickSignIn}
           >
             <Image src={"/images/thirdparty/google-icon.png"} preview={false} width={25}/>
             Google 계정으로 회원가입/로그인

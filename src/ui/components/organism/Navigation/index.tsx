@@ -8,7 +8,8 @@ import SignUp from "@/ui/components/organism/modals/SignUp";
 import useToggle from "@/hooks/useToggle";
 import useUserStore, {User} from "@/store/user";
 import {postUserInfo, signOut} from "@/api/user";
-import "@/thridparty/firebase";
+import "@/thirdparty/firebase";
+import dayjs from "dayjs";
 
 const items = new Array(1).fill(null).map((_, index) => ({
   key: String(index + 1),
@@ -37,16 +38,18 @@ const Navigation = () => {
       centered: true,
       okText: "아니오",
       cancelText: "네",
-      onCancel: () => {
+      onCancel: async () => {
         const user = {
           ...userStore.user as User,
-          date_of_logout: new Date().toString()
+          logged_out_at: dayjs().toISOString()
         }
-
-        postUserInfo(user);
-        signOut().finally(() => {
+        try {
+          await Promise.all([postUserInfo(user), signOut()]);
+        } catch (error) {
+          console.error('로그아웃 실패: ', error);
+        } finally {
           userStore.resetUser();
-        });
+        }
       }
     });
   }
