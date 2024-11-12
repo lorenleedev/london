@@ -3,6 +3,7 @@ import {useState} from "react";
 import styles from "@/ui/components/organism/modals/SignUp/SignUp.module.scss";
 import useUserStore, {User} from "@/store/user";
 import {postUserInfo, signIn} from "@/api/user";
+import {FirebaseError} from "@firebase/app";
 
 interface SignUpProps {
   open: boolean;
@@ -27,19 +28,27 @@ const SignUp = ({
       };
       return userInfo;
     } catch (error: unknown) {
-      if (error instanceof Error) {
-        setErrorMessage(error.message);
-      } else {
-        console.error('구글 로그인 중 signInWithGoogle 함수에서 에러 발생: ', error);
-      }
+      const errorCode = error instanceof FirebaseError ? error.code : '';
+      throw new Error(errorCode);
     }
   };
 
   const handleClickSignIn = async () => {
-    const userInfo = await signInWithGoogle();
-    await postUserInfo(userInfo);
-    userStore.setUser(userInfo);
-    handleCancel();
+    try {
+      const userInfo = await signInWithGoogle();
+      if (userInfo) {
+        await postUserInfo(userInfo);
+        userStore.setUser(userInfo);
+        handleCancel();
+      }
+    } catch (error: Error) {
+      // 사용자가 구글 로그인 팝업을 닫은 경우
+      if (error.message === 'auth/popup-closed-by-user') {
+        setErrorMessage('');
+      } else {
+        setErrorMessage('회원가입/로그인에 실패했습니다. 다시 시도해주세요.');
+      }
+    }
   }
 
   return (
