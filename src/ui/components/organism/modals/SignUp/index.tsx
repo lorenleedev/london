@@ -41,9 +41,9 @@ const SignUp = ({
         userStore.setUser(userInfo);
         handleCancel();
       }
-    } catch (error: Error) {
+    } catch (error: unknown) {
       // 사용자가 구글 로그인 팝업을 닫은 경우
-      if (error.message === 'auth/popup-closed-by-user') {
+      if ( error instanceof Error && error.message === 'auth/popup-closed-by-user') {
         setErrorMessage('');
       } else {
         setErrorMessage('회원가입/로그인에 실패했습니다. 다시 시도해주세요.');
