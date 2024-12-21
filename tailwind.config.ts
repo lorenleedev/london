@@ -11,6 +11,10 @@ const config: Config = {
         background: "var(--background)",
         foreground: "var(--foreground)",
       },
+      container: {
+        center: true, // 컨테이너를 항상 화면 중앙에 배치
+        padding: '2rem', // 기본 padding을 2rem으로 설정
+      },
     },
   },
   plugins: [],
