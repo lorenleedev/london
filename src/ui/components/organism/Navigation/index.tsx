@@ -14,7 +14,7 @@ import {usePathname, useRouter} from "next/navigation";
 import Link from "next/link";
 import {auth} from "@/thirdparty/firebase";
 
-const items = new Array(1).fill(null).map((_, index) => ({
+const items = new Array(1).fill(null).map(() => ({
   key: '/',
   label: (<Link href={'/'}>채용공고</Link>),
 }));
