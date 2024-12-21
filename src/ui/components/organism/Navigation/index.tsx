@@ -3,7 +3,6 @@ import {Header} from "antd/es/layout/layout";
 import {Button, Flex, Image, Menu, Modal} from "antd";
 import ButtonGroup from "antd/es/button/button-group";
 import {PoweroffOutlined, SettingOutlined, UserOutlined} from "@ant-design/icons";
-import {useEffect, useState} from "react";
 import SignUp from "@/ui/components/organism/modals/SignUp";
 import useToggle from "@/hooks/useToggle";
 import useUserStore, {User} from "@/store/user";
@@ -12,7 +11,7 @@ import "@/thirdparty/firebase";
 import dayjs from "dayjs";
 import {usePathname, useRouter} from "next/navigation";
 import Link from "next/link";
-import {auth} from "@/thirdparty/firebase";
+import useAuth from "@/hooks/useAuth";
 
 const items = new Array(1).fill(null).map(() => ({
   key: '/',
@@ -21,30 +20,12 @@ const items = new Array(1).fill(null).map(() => ({
 
 const Navigation = () => {
   const userStore = useUserStore();
+  const {isSignIn} = useAuth();
   const router = useRouter();
   const path = usePathname();
 
   const {isToggleOn: isSignUpModalOn, handleToggle: handleSignUpToggle} = useToggle();
-  const [isSignIn, setIsSignIn] = useState(false);
   const [modal, contextHolder] = Modal.useModal();
-
-  useEffect(() => {
-    const unsubscribe = auth.onAuthStateChanged((user) => {
-      if (user) {
-        const userInfo: User = {
-          uid: user.uid,
-          user_name: user.displayName || '사용자',
-          email: user.email,
-          profile_picture: user.photoURL
-        };
-        userStore.setUser(userInfo);
-        setIsSignIn(true);
-      } else {
-        setIsSignIn(false);
-      }
-    });
-    return () => unsubscribe();
-  }, []);
 
   const handleClickSignOut = () => {
     modal.confirm({

@@ -1,14 +1,7 @@
-import {Button, Result} from "antd";
+import ForbiddenPage from "@/ui/pages/errors/403";
 
-const ForbiddenPage = () => {
+export default function ForbiddenPageApp() {
   return (
-    <Result
-      status="403"
-      title="403"
-      subTitle="로그인된 회원만 볼 수 있는 페이지에요!"
-      extra={<Button type="primary" href={'/'}>메인으로 돌아가기</Button>}
-    />
+    <ForbiddenPage/>
   );
-};
-
-export default ForbiddenPage;
+}
