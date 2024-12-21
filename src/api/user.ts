@@ -34,3 +34,14 @@ export const postUserInfo = (user: User) => {
     updated_at: new Date().toISOString(),
   });
 };
+
+export const deleteUser = async () => {
+  const user = auth.currentUser;
+
+  if (!user) {
+    throw new Error('사용자 정보가 없습니다.');
+  } else {
+    await user.delete();
+    auth.signOut();
+  }
+}
