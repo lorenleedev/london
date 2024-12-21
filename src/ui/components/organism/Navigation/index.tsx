@@ -12,6 +12,7 @@ import "@/thirdparty/firebase";
 import dayjs from "dayjs";
 import {usePathname, useRouter} from "next/navigation";
 import Link from "next/link";
+import {auth} from "@/thirdparty/firebase";
 
 const items = new Array(1).fill(null).map((_, index) => ({
   key: '/',
@@ -28,12 +29,22 @@ const Navigation = () => {
   const [modal, contextHolder] = Modal.useModal();
 
   useEffect(() => {
-    if (userStore.user) {
-      setIsSignIn(true);
-    } else {
-      setIsSignIn(false);
-    }
-  }, [userStore.user]);
+    const unsubscribe = auth.onAuthStateChanged((user) => {
+      if (user) {
+        const userInfo: User = {
+          uid: user.uid,
+          user_name: user.displayName || '사용자',
+          email: user.email,
+          profile_picture: user.photoURL
+        };
+        userStore.setUser(userInfo);
+        setIsSignIn(true);
+      } else {
+        setIsSignIn(false);
+      }
+    });
+    return () => unsubscribe();
+  }, []);
 
   const handleClickSignOut = () => {
     modal.confirm({
