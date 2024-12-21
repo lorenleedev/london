@@ -1,10 +1,12 @@
 "use client"
-// TODO: 진입 시점에 로그인 여부를 판단해야함.
 import {Content} from "antd/es/layout/layout";
 import {Flex, Tabs} from "antd";
 import SectionAccount from "@/ui/pages/MyPage/SectionAccount";
+import useGuardedPage from "@/hooks/useGuardedPage";
 
 const MyPage = () => {
+  useGuardedPage();
+
   return (
     <Content>
       <Flex className={'container my-20'}>
