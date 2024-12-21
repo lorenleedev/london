@@ -10,26 +10,41 @@ import useUserStore, {User} from "@/store/user";
 import {postUserInfo, signOut} from "@/api/user";
 import "@/thirdparty/firebase";
 import dayjs from "dayjs";
+import {usePathname, useRouter} from "next/navigation";
+import Link from "next/link";
+import {auth} from "@/thirdparty/firebase";
 
-const items = new Array(1).fill(null).map((_, index) => ({
-  key: String(index + 1),
-  label: `채용공고`,
+const items = new Array(1).fill(null).map(() => ({
+  key: '/',
+  label: (<Link href={'/'}>채용공고</Link>),
 }));
 
 const Navigation = () => {
   const userStore = useUserStore();
+  const router = useRouter();
+  const path = usePathname();
 
   const {isToggleOn: isSignUpModalOn, handleToggle: handleSignUpToggle} = useToggle();
   const [isSignIn, setIsSignIn] = useState(false);
   const [modal, contextHolder] = Modal.useModal();
 
   useEffect(() => {
-    if (userStore.user) {
-      setIsSignIn(true);
-    } else {
-      setIsSignIn(false);
-    }
-  }, [userStore.user]);
+    const unsubscribe = auth.onAuthStateChanged((user) => {
+      if (user) {
+        const userInfo: User = {
+          uid: user.uid,
+          user_name: user.displayName || '사용자',
+          email: user.email,
+          profile_picture: user.photoURL
+        };
+        userStore.setUser(userInfo);
+        setIsSignIn(true);
+      } else {
+        setIsSignIn(false);
+      }
+    });
+    return () => unsubscribe();
+  }, []);
 
   const handleClickSignOut = () => {
     modal.confirm({
@@ -49,6 +64,7 @@ const Navigation = () => {
           console.error('로그아웃 실패: ', error);
         } finally {
           userStore.resetUser();
+          router.push('/')
         }
       }
     });
@@ -69,6 +85,7 @@ const Navigation = () => {
       <Menu
         mode="horizontal"
         defaultSelectedKeys={['1']}
+        selectedKeys={[path]}
         items={items}
         style={{
           flex: 1,
@@ -89,7 +106,7 @@ const Navigation = () => {
             반갑습니다, {userStore.user?.user_name}님!
           </Flex>
           <ButtonGroup>
-            <Button>
+            <Button onClick={() => router.push('/my-page')}>
               <SettingOutlined/>마이페이지</Button>
             <Button onClick={handleClickSignOut}>
               <PoweroffOutlined/>로그아웃

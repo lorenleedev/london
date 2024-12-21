@@ -34,3 +34,15 @@ export const postUserInfo = (user: User) => {
     updated_at: new Date().toISOString(),
   });
 };
+
+export const deleteUser = async (user: User) => {
+  try {
+    const userRef = ref(db, 'users/' + encodeURIComponent(user.uid));
+    await set(userRef, null);
+    const currentUser = auth.currentUser;
+    await currentUser?.delete();
+  } catch (error) {
+    console.error('사용자 삭제 중 오류 발생:', error);
+    throw error;
+  }
+}

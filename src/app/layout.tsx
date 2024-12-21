@@ -1,6 +1,9 @@
 import type { Metadata } from "next";
-import "./globals.css";
+import "./globals.scss";
 import { AntdRegistry } from '@ant-design/nextjs-registry';
+import Navigation from "@/ui/components/organism/Navigation";
+import Footer from "@/ui/components/organism/Footer";
+import Layout from "@/ui/components/atom/Layout";
 
 export const metadata: Metadata = {
   title: "Between Jobs",
@@ -17,7 +20,13 @@ export default function RootLayout({
       <body
         className={`antialiased`}
       >
-        <AntdRegistry>{children}</AntdRegistry>
+      <AntdRegistry>
+        <Layout>
+          <Navigation/>
+          {children}
+          <Footer/>
+        </Layout>
+      </AntdRegistry>
       </body>
     </html>
   );
