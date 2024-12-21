@@ -3,6 +3,7 @@ import {Button, Descriptions, DescriptionsProps, Image, Modal, Popover} from "an
 import useUserStore from "@/store/user";
 import {deleteUser} from "@/api/user";
 import {useRouter} from "next/navigation";
+import {auth} from "@/thirdparty/firebase";
 
 const SectionAccount = () => {
   const userStore = useUserStore();
@@ -62,7 +63,9 @@ const SectionAccount = () => {
       cancelText: "네",
       onCancel: async () => {
         try {
-          await deleteUser();
+          if (!userStore.user) throw Error();
+          await deleteUser(userStore.user);
+          await auth.signOut();
           userStore.resetUser();
           router.push('/');
         } catch (error) {
